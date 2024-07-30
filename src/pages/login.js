@@ -4,9 +4,11 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const apiUrl = process.env.GATSBY_API_URL;
+
     const handleLogin = async () => {
         try {
-            const peticion = await fetch('http://localhost/api-qr-tandem/v1/login-user.php', {
+            const peticion = await fetch(`${apiUrl}/login-user.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,7 +24,7 @@ const Login = () => {
                 localStorage.setItem('tndm_email', respuesta.user.email)
                 // localStorage.setItem('tndm_img_user', respuesta.user.image_url)
                 localStorage.setItem('tndm_role', respuesta.user.role)
-                window.location.href='/profile'
+                window.location.href='/micuenta'
             } else {
                 setMessage('Credenciales incorrectas');
             }
